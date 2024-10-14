@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity"
+    >
+
+    <ImageButton
+        android:id="@+id/contactsButton"
+        android:layout_width="225dp"
+        android:layout_height="225dp"
+        android:scaleType="fitXY"
+        android:background="@color/transparent"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/contacts"
+        />
+
+    <ImageButton
+        android:id="@+id/cameraButton"
+        android:layout_width="225dp"
+        android:layout_height="225dp"
+        android:scaleType="fitXY"
+        android:background="@color/transparent"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        app:srcCompat="@drawable/camera"
+        tools:layout_editor_absoluteX="65dp"
+        tools:layout_editor_absoluteY="270dp" />
+
+    <ImageButton
+        android:id="@+id/mapsButton"
+        android:layout_width="225dp"
+        android:layout_height="225dp"
+        android:scaleType="fitXY"
+        android:background="@color/transparent"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/maps"
+        tools:layout_editor_absoluteX="301dp"
+        tools:layout_editor_absoluteY="699dp" />
+
+
+</RelativeLayout>
