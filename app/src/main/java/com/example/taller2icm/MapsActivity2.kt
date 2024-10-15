@@ -62,6 +62,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, SensorEventListen
     private lateinit var mLocationCallback: LocationCallback
     private lateinit var sensorManager: SensorManager
     private lateinit var geocoder: Geocoder
+    private lateinit var lightSensorListener : SensorEventListener
     private var lightSensor: Sensor? = null
     private var lastLocation: Location? = null
     private var currentMarker: Marker? = null
@@ -79,6 +80,7 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, SensorEventListen
         // Inicializar el sensor de luz
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+
 
         // Inicializae el geocodificador
         geocoder = Geocoder(this, Locale.getDefault())
@@ -204,14 +206,13 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, SensorEventListen
     private fun searchLocation() {
 
         val address = binding.texto.toString()
-
         try {
             val addressList = geocoder.getFromLocationName(address, 1)
             if (addressList != null && addressList.isNotEmpty()) {
                 val addressFound = addressList[0]
-                val latLng = LatLng(addressFound.latitude, addressFound.longitude)
-                addMarkerWithAddress(latLng)  // Agrega un marcador con la dirección
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f))
+                val position = LatLng(addressFound.latitude, addressFound.longitude)
+                addMarkerWithAddress(position)  // Agrega un marcador con la dirección
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 15f))
             } else {
                 Toast.makeText(this, "No se encontró la dirección", Toast.LENGTH_LONG).show()
             }
@@ -289,13 +290,13 @@ class MapsActivity2 : AppCompatActivity(), OnMapReadyCallback, SensorEventListen
    /*override fun onResume() {
         super.onResume()
         lightSensor?.let {
-            sensorManager.registerListener(this, it, SensorManager.SENSOR_DELAY_NORMAL)
+            sensorManager.registerListener(lightSensorListener, lightSensor, SensorManager.SENSOR_DELAY_NORMAL)
         }
         if(isLocationUpdateEnabled){
             startLocationUpdates()
         }
-    }
-*/
+    }*/
+
     override fun onPause() {
         super.onPause()
         sensorManager.unregisterListener(this)
